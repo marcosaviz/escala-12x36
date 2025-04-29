@@ -1,0 +1,71 @@
+<div class="dayoffs-list">
+  <h2>Folgas</h2>
+  <button mat-raised-button color="primary" routerLink="/dayoffs/new">Nova Folga</button>
+
+  <table mat-table [dataSource]="dayOffs">
+    <ng-container matColumnDef="employeeId">
+      <th mat-header-cell *matHeaderCellDef> Funcionário ID </th>
+      <td mat-cell *matCellDef="let dayOff"> {{ dayOff.employeeId }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Data </th>
+      <td mat-cell *matCellDef="let dayOff"> {{ dayOff.date | date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="reason">
+      <th mat-header-cell *matHeaderCellDef> Motivo </th>
+      <td mat-cell *matCellDef="let dayOff"> {{ dayOff.reason || 'Folga' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let dayOff">
+        <button mat-button color="primary" [routerLink]="['/dayoffs/edit', dayOff.id]">Editar</button>
+        <button mat-button color="warn" (click)="deleteDayOff(dayOff.id)">Excluir</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['employeeId', 'date', 'reason', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['employeeId', 'date', 'reason', 'actions'];"></tr>
+  </table>
+</div>
+
+
+<!-- <div class="container">
+  <h2>Funcionários</h2>
+  <button mat-raised-button color="primary" routerLink="/employees/new">Novo Funcionário</button>
+  <table mat-table [dataSource]="employees" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.name}} </td>
+    </ng-container>
+
+
+    <ng-container *ngFor="let employee of employees">
+      <tr>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.position }}</td>
+        <td>{{ employee.email }}</td>
+        <td>
+          <button mat-button color="primary" [routerLink]="['/employees/edit', employee.id]">Editar</button>
+          <button mat-button color="warn" (click)="deleteEmployee(employee.id)">Excluir</button>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let employee">
+        <button mat-button color="warn" (click)="deleteEmployee(employee.id)">Excluir</button>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="['name', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['name', 'actions'];"></tr>
+  </table>
+</div> -->
+
+
+
+
