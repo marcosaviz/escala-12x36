@@ -2,13 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DayOff } from 'src/app/models/dayoff.model';
+import { environment } from 'src/environments/environment';
+
+
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DayOffService {
-  private readonly API = '/api/dayoffs';
-
+  //private readonly API = '/api/dayoffs';
+  private readonly API = `${environment.apiUrl}/api/dayoffs`;
   constructor(private http: HttpClient) {}
 
   list(): Observable<DayOff[]> {

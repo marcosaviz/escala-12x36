@@ -7,6 +7,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
 import { RouterModule } from '@angular/router';  // Certifique-se de importar RouterModule
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
+
 
 
 
@@ -15,16 +21,20 @@ import { RouterModule } from '@angular/router';  // Certifique-se de importar Ro
 @NgModule({
   declarations: [
     EmployeesComponent,
-    ListComponent,
-    FormComponent,
+    
+    
+    
     
   ],
   imports: [
-    CommonModule,
-    MatTableModule,
-    EmployeesRoutingModule,
-    RouterModule,
-    MatButtonModule
+  CommonModule,
+  EmployeesRoutingModule,
+  ReactiveFormsModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  RouterModule,
+  MatTableModule
   ]
 })
 export class EmployeesModule { }

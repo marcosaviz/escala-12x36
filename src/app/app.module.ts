@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';  // Certifique-se de que o AppRoutingModule esteja importado também
 import {EmployeesModule} from 'src/app/features/employees/employees.module'
 import { FullCalendarModule } from '@fullcalendar/angular';
-  
+import { HttpClientModule } from '@angular/common/http'; // 👈 Adicione isso
 
 
 
@@ -25,8 +25,10 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     MatTableModule,
     MatButtonModule,
     EmployeesModule, // Adicione EmployeesModule aqui
-    FullCalendarModule // Adicione FullCalendarModule aqui
+    FullCalendarModule, // Adicione FullCalendarModule aqui
+    HttpClientModule // 👈 Adicione isso aqui
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

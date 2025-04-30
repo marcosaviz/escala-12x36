@@ -2,12 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employee } from 'src/app/models/employee.model'
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class EmployeeService {
-  private readonly API = '/api/employees';
+  //private readonly API = '/api/employees';
+  private readonly API = `${environment.apiUrl}/api/employees`;
 
   constructor(private http: HttpClient) {}
 
@@ -31,29 +36,6 @@ export class EmployeeService {
     return this.http.delete<void>(`${this.API}/${id}`);
   }
 }
-// import { HttpClient } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
-// import { Observable } from 'rxjs';
-
-
-// @Injectable({ providedIn: 'root' })
-// export class EmployeeService {
-//   private apiUrl = 'http://localhost:3000/api/employees'; // ajustar conforme ambiente
-
-//   constructor(private http: HttpClient) {}
-
-//   getAll(): Observable<any> {
-//     return this.http.get(this.apiUrl);
-//   }
-
-//   create(data: any): Observable<any> {
-//     return this.http.post(this.apiUrl, data);
-//   }
-
-//   delete(id: number): Observable<any> {
-//     return this.http.delete(`${this.apiUrl}/${id}`);
-//   }
-// }
 
 
 

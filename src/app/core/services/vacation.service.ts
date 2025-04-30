@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Vacation } from 'src/app/models/vacation.model';
+import { environment } from 'src/environments/environment';
+
 
 
     
@@ -9,8 +11,8 @@ import { Vacation } from 'src/app/models/vacation.model';
   providedIn: 'root'
 })
 export class VacationService {
-  private readonly API = '/api/vacations';
-
+  //private readonly API = '/api/vacations';
+  private readonly API = `${environment.apiUrl}/api/vacations`;
   constructor(private http: HttpClient) {}
 
   list(): Observable<Vacation[]> {
