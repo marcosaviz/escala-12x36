@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   selector: 'app-dayoff-form',
   templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss'], // Certifique-se que o caminho está correto
+  encapsulation: ViewEncapsulation.None,
   imports: [
     CommonModule,
     ReactiveFormsModule,

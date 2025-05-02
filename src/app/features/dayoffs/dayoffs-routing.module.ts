@@ -5,14 +5,16 @@ import { FormComponent } from './form/form.component';
 import { DayoffsComponent } from './dayoffs.component';
 
 
-
 const routes: Routes = [
-  { path: '', component: ListComponent},
-  { path: 'new', component: FormComponent },
-  { path: 'edit/:id', component: FormComponent }
-
-
+  {
+    path: '', component: DayoffsComponent, children: [
+      { path: '', component: ListComponent }, // Lista de folgas
+      { path: 'new', component: FormComponent }, // Formulário para nova folga
+      { path: 'edit/:id', component: FormComponent } // Formulário para editar uma folga
+    ]
+  }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

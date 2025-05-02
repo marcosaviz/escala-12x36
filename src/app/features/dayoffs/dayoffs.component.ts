@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+
 
 @Component({
   selector: 'app-dayoffs',
   standalone: false,
   templateUrl: './dayoffs.component.html',
-  styleUrl: './dayoffs.component.scss'
+  styleUrls: ['./dayoffs.component.scss'],
+  encapsulation: ViewEncapsulation.None, // Desabilitando o encapsulamento de estilo
 })
+
 export class DayoffsComponent {
 
 }
