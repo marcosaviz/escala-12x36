@@ -1,6 +1,8 @@
 <div class="dayoffs-list">
-  <h2>Folgas</h2>
-  <button mat-raised-button color="primary" routerLink="/dayoffs/new">Nova Folga</button>
+  <div class="dayoffs-header">
+    <h2>Folgas</h2>
+    <button mat-raised-button color="primary" routerLink="/dayoffs/new">Adicionar Folga</button>
+  </div>
 
   <table mat-table [dataSource]="dayOffs">
     <ng-container matColumnDef="employeeId">

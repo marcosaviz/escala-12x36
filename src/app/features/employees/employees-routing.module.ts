@@ -9,15 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 
 
 
-// const routes: Routes = [
-//   { path: '', component: ListComponent},
-//   { path: 'new', component: FormComponent },
-//   { path: 'edit/:id', component: FormComponent }
-
-  
-// ];
-
-
 const routes: Routes = [
   {
     path: '',

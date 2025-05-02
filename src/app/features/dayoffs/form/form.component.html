@@ -1,66 +1,28 @@
 <div class="dayoff-form">
-  <h2>{{ dayOffId ? 'Editar Folga' : 'Nova Folga' }}</h2>
+  <h2>{{ dayOffId ? 'Editar Folga' : 'Adicionar Folga' }}</h2>
+
   <form [formGroup]="dayOffForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <mat-label>ID do Funcionário</mat-label>
-      <input matInput formControlName="employeeId" type="number">
-    </mat-form-field>
+    <div class="form-fields">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>ID do Funcionário</mat-label>
+        <input matInput formControlName="employeeId" type="number">
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Data da Folga</mat-label>
-      <input matInput formControlName="date" type="date">
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Data da Folga</mat-label>
+        <input matInput formControlName="date" type="date">
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Motivo (opcional)</mat-label>
-      <input matInput formControlName="reason" type="text">
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Motivo (opcional)</mat-label>
+        <input matInput formControlName="reason" type="text">
+      </mat-form-field>
+    </div>
 
-    <button mat-raised-button color="primary" type="submit">
-      {{ dayOffId ? 'Atualizar' : 'Salvar' }}
-    </button>
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">
+        {{ dayOffId ? 'Atualizar' : 'Salvar' }}
+      </button>
+    </div>
   </form>
-</div>  
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="container">
-    <h2>Novo Funcionário</h2>
-    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Nome</mat-label>
-        <input matInput formControlName="name" placeholder="Nome do funcionário">
-        <mat-error *ngIf="employeeForm.get('name')?.invalid">Nome é obrigatório</mat-error>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Cargo</mat-label>
-        <input matInput formControlName="position" placeholder="Cargo">
-        <mat-error *ngIf="employeeForm.get('position')?.invalid">Cargo é obrigatório</mat-error>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" placeholder="Email">
-        <mat-error *ngIf="employeeForm.get('email')?.invalid">Email válido é obrigatório</mat-error>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Telefone</mat-label>
-        <input matInput formControlName="phone" placeholder="Telefone">
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" type="submit" [disabled]="employeeForm.invalid">Salvar</button>
-      <button mat-button routerLink="/employees" color="warn">Cancelar</button>
-    </form>
-  </div> -->
+</div>

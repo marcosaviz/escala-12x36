@@ -1,7 +1,32 @@
-.spacer {
-    flex: 1 1 auto;
+nav {
+  background-color: #232851;
+  padding: 10px 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-family: Roboto, sans-serif;
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
   }
-  
-  .main-container {
-    padding: 20px;
-  }
+}
+
+hr {
+  margin: 0;
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+}

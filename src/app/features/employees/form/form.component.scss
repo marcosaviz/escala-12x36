@@ -1,21 +1,36 @@
 .form-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
+  h2 {
+    text-align: center;
+    color: #3f51b5;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
 
   .top-actions {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 16px;
   }
+
+  mat-form-field.full-width {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+
+    button {
+      min-width: 140px;
+    }
+  }
+}
