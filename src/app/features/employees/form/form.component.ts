@@ -64,6 +64,7 @@ export class FormComponent implements OnInit {
     if (this.employeeForm.valid) {
       const formValues = { ...this.employeeForm.value };
 
+
       const formattedDate = this.formatDate(formValues.birthDate);
       if (!formattedDate) {
         alert('Data de nascimento inválida');
@@ -84,6 +85,10 @@ export class FormComponent implements OnInit {
         }
       });
     }
+  }
+
+  goToList(): void {
+    this.router.navigate(['/employees/list']);
   }
 
   cancel(): void {
