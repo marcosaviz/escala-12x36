@@ -7,13 +7,13 @@ import { RouterModule } from '@angular/router'; // Certifique-se de importar o R
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatIconModule } from '@angular/material/icon';
 
 
 
 @Component({
-  selector: 'app-list',
   standalone: true,
+  selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   imports: [
@@ -21,13 +21,13 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     MatTableModule,      // <== IMPORTANTE!
     MatButtonModule,
-    RouterModule
+    MatIconModule,
 
   ]
 })
 export class ListComponent implements OnInit {
   employees: Employee[] = [];
-  displayedColumns: string[] = ['name', 'position', 'actions'];
+  displayedColumns: string[] = ['name', 'birthDate', 'email', 'phone', 'actions'];
 
   constructor(
     private employeeService: EmployeeService,

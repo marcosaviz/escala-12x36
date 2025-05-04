@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';  // Certifique-se de qu
 import {EmployeesModule} from 'src/app/features/employees/employees.module'
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { HttpClientModule } from '@angular/common/http'; // 👈 Adicione isso
-
+import { MatIconModule } from '@angular/material/icon';  // Importe o MatIconModule
 
 
 
@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http'; // 👈 Adicione isso
 @NgModule({
   declarations: [
     AppComponent,
+    
 
   ],
   imports: [
@@ -24,7 +25,6 @@ import { HttpClientModule } from '@angular/common/http'; // 👈 Adicione isso
     AppRoutingModule,
     MatTableModule,
     MatButtonModule,
-    EmployeesModule, // Adicione EmployeesModule aqui
     FullCalendarModule, // Adicione FullCalendarModule aqui
     HttpClientModule // 👈 Adicione isso aqui
   ],

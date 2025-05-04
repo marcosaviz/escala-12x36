@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 
 
 export class EmployeeService {
-  //private readonly API = '/api/employees';
   private readonly API = `${environment.apiUrl}/api/employees`;
 
   constructor(private http: HttpClient) {}
