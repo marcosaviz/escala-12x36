@@ -1,8 +1,10 @@
-import { Component, ViewEncapsulation, OnInit  } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/core';
-import { FullCalendarModule } from '@fullcalendar/angular';
-import dayGridPlugin from '@fullcalendar/daygrid'; // Importando o plugin necessário
+import { Component, ViewEncapsulation, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { CalendarOptions, EventInput } from '@fullcalendar/core';
+import { FullCalendarModule, FullCalendarComponent } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import { ScheduleService } from 'src/app/core/services/schedule.service';
+import { Schedule } from 'src/app/models/schedule.model';
+
 
 
 @Component({
@@ -11,69 +13,67 @@ import { ScheduleService } from 'src/app/core/services/schedule.service';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [FullCalendarModule] // Certifique-se de que o FullCalendarModule esteja aqui
+  imports: [FullCalendarModule]
 })
-
 export class CalendarComponent implements OnInit {
+  @ViewChild('fullcalendar') calendarComponent!: FullCalendarComponent;
   calendarOptions!: CalendarOptions;
 
-  constructor(private scheduleService: ScheduleService) {}
+  constructor(
+    private scheduleService: ScheduleService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
+    this.calendarOptions = {
+      initialView: 'dayGridMonth',
+      plugins: [dayGridPlugin],
+      events: [],
+    };
+
     this.loadSchedules();
   }
 
-  loadSchedules() {
-    this.scheduleService.list().subscribe(schedules => {
-      console.log('Escalas recebidas:', schedules); //👈 Verifique se os dados estão corretos
-      
-      this.calendarOptions = {
-        initialView: 'dayGridMonth',
-        plugins: [dayGridPlugin], // Registre os plugins aqui
-        events: schedules.map(s => ({
-          title: `${s.employeeName} (${s.shift_type === 'DAY' ? 'Dia' : 'Noite'})`,
-          date: s.shift_date.split('T')[0],
-          //date: new Date(s.shift_date).toISOString().split('T')[0], // Converte para 'YYYY-MM-DD' no formato ISO
-          color: s.shift_type === 'DAY' ? '#FFEB3B' : '#3F51B5', // Amarelo para diurno, Azul para noturno
-          textColor: s.shift_type === 'DAY' ? '#000' : '#FFF', // Preto para diurno, branco para noturno
-        
-        }))
-      };
+  loadSchedules(): void {
+    this.scheduleService.list().subscribe((schedules: Schedule[]) => {
+      console.log('Escalas recebidas:', schedules);
+
+      const events: EventInput[] = schedules.map(s => ({
+        title: `${s.employeeName ?? 'Sem nome'} (${s.shift_type === 'DAY' ? '🌞' : '🌙'})`,
+        date: s.shift_date.split('T')[0],
+        color: s.shift_type === 'DAY' ? '#FFEB3B' : '#3F51B5',
+        textColor: s.shift_type === 'DAY' ? '#000' : '#FFF',
+        allDay: true,
+      }));
+
+      const calendarApi = this.calendarComponent.getApi();
+      calendarApi.removeAllEvents();
+      calendarApi.addEventSource(events);
+
+      this.cdr.detectChanges();
     });
   }
 
-  generateSchedule() {
+  generateSchedule(): void {
     const today = new Date();
-    const month = today.getMonth() + 1; // getMonth() retorna 0 a 11
     const year = today.getFullYear();
+    const currentMonth = today.getMonth();
 
-    // Calculando o primeiro dia e o último dia do mês
-  const start_date = new Date(year, month, 1); // Primeiro dia do mês
-  const end_date = new Date(year, month + 1, 0); // Último dia do mês (mês + 1, dia 0)
+    const start_date = new Date(year, currentMonth, 1);
+    const end_date = new Date(year, currentMonth + 1, 0);
 
+    const start_date_iso = start_date.toISOString();
+    const end_date_iso = end_date.toISOString();
 
-  // Convertendo as datas para o formato ISO (string)
-  const start_date_iso = start_date.toISOString(); // Ex: '2025-06-01T00:00:00.000Z'
-  const end_date_iso = end_date.toISOString(); // Ex: '2025-06-30T23:59:59.999Z'
-
-    // Convertendo as datas para o formato ISO (string)
-  this.scheduleService.generate(start_date_iso, end_date_iso).subscribe({
+    this.scheduleService.generate(start_date_iso, end_date_iso).subscribe({
       next: () => {
-        alert('Escala gerada coms sucesso!');
-        this.loadSchedules(); //recarrega os eventos no calendario 
+        alert('Escala gerada com sucesso!');
+        this.loadSchedules();
       },
       error: (err) => {
-        console.error('Erro ao gerar escala:' , err);
+        console.error('Erro ao gerar escala:', err);
         alert('Erro ao gerar escala. Verifique o servidor.');
       }
     });
   }
 }
-
-
-
-
-
-
-
-

@@ -31,6 +31,7 @@ export class FormComponent implements OnInit {
   employeeId?: number;
   isEditMode: boolean = false;
 
+
   constructor(
     private fb: FormBuilder,
     private employeeService: EmployeeService,
@@ -93,5 +94,13 @@ export class FormComponent implements OnInit {
       });
     }
   }
+  goToList(): void {
+    this.router.navigate(['/employees/list']);
+  }
+
+  cancel(): void {
+    this.goToList();
+  }
 };
+
   
