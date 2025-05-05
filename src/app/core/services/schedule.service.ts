@@ -10,15 +10,15 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ScheduleService {
-  //private readonly API = '/api/schedules';
-  private readonly API = `${environment.apiUrl}/api/schedules`;
+  //private readonly API = '/api/shifts';
+  private readonly API = `${environment.apiUrl}/api/shifts`;
   constructor(private http: HttpClient) {}
 
   list(): Observable<Schedule[]> {
     return this.http.get<Schedule[]>(this.API);
   }
 
-  generate(month: number, year: number): Observable<void> {
-    return this.http.post<void>(`${this.API}/generate`, { month, year });
+  generate(start_date: string, end_date: string): Observable<void> {
+    return this.http.post<void>(`${this.API}/generate`, { start_date, end_date });
   }
 }

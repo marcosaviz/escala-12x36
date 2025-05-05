@@ -6,6 +6,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from 'src/app/core/services/employee.service';
+import { CreateEmployeeDto } from 'src/app/models/create-employee.dto';  // Importando o DTO para criação
+import { Employee } from 'src/app/models/employee.model';
+import { UpdateEmployeeDto } from 'src/app/models/update-employee.dto';
+
 
 
 @Component({
@@ -61,36 +65,33 @@ export class FormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.employeeForm.valid) {
-      const formValues = { ...this.employeeForm.value };
-
-
+      const formValues = this.employeeForm.value;
       const formattedDate = this.formatDate(formValues.birthDate);
+  
       if (!formattedDate) {
         alert('Data de nascimento inválida');
         return;
       }
-
-      formValues.birthDate = formattedDate;
-
+  
+      const payload = {
+        name: formValues.name,
+        birth_date: formattedDate,
+        email: formValues.email,
+        phone: formValues.phone
+      };
+  
       const request = this.isEditMode
-        ? this.employeeService.update(this.employeeId!, formValues)
-        : this.employeeService.create(formValues);
-
+        ? this.employeeService.update(this.employeeId!, payload)
+        : this.employeeService.create(payload);
+  
       request.subscribe({
-        next: () => this.router.navigate(['/employees/list']),
+        next: () => this.router.navigate(['/employees/list']), // ✅ rota corrigida
         error: (err) => {
-          console.error('Erro ao enviar dados:', err);
+          console.error('Erro ao salvar os dados:', err);
           alert('Erro ao salvar os dados. Por favor, tente novamente.');
         }
       });
     }
   }
-
-  goToList(): void {
-    this.router.navigate(['/employees/list']);
-  }
-
-  cancel(): void {
-    this.router.navigate(['/employees/list']);
-  }
-}
+};
+  
