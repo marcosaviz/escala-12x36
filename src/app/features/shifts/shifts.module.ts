@@ -9,12 +9,14 @@ import { CalendarComponent } from 'src/app/features/schedules/calendar/calendar.
 @NgModule({
   declarations: [
     ShiftsComponent,
-    ViewComponent
+    
   ],
   imports: [
     CommonModule,
     ShiftsRoutingModule,
-    FullCalendarModule // Aqui você já está importando FullCalendar, sem registrar plugins
+    FullCalendarModule, // Aqui você já está importando FullCalendar, sem registrar plugins
+    CalendarComponent, // standalone
+    ViewComponent      // standalone
   ]
 })
 export class ShiftsModule { }
