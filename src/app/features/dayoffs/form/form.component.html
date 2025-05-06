@@ -3,24 +3,41 @@
 
   <form [formGroup]="dayOffForm" (ngSubmit)="onSubmit()">
     <div class="form-fields">
+      
+      <!-- Campo: Funcionário -->
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>ID do Funcionário</mat-label>
-        <input matInput formControlName="employeeId" type="number">
+        <mat-label>Funcionário</mat-label>
+        <mat-select formControlName="employeeId" required>
+          <mat-option *ngFor="let employee of employees" [value]="employee.id">
+            {{ employee.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
+      <!-- Campo: Data da folga -->
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Data da Folga</mat-label>
-        <input matInput formControlName="date" type="date">
+        <input
+         matInput 
+         [matDatepicker]="picker" 
+         formControlName="date" 
+         [matDatepickerFilter]="filterValidDate"
+         >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
+      <!-- Campo: Motivo -->
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Motivo (opcional)</mat-label>
         <input matInput formControlName="reason" type="text">
       </mat-form-field>
+
     </div>
 
+    <!-- Ações -->
     <div class="form-actions">
-      <button mat-raised-button color="primary" type="submit">
+      <button mat-raised-button color="primary" type="submit" [disabled]="dayOffForm.invalid">
         {{ dayOffId ? 'Atualizar' : 'Salvar' }}
       </button>
     </div>

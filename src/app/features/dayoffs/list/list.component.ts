@@ -3,7 +3,6 @@ import { EmployeeService } from 'src/app/core/services/employee.service';
 import { MatTableModule } from '@angular/material/table'; // Importar aqui!
 import { RouterModule } from '@angular/router';  // Adicione esta linha
 import { CommonModule } from '@angular/common';  // Importando CommonModule
-
 import { DayOffService } from 'src/app/core/services/dayoff.service';
 import { DayOff } from 'src/app/models/dayoff.model';
 

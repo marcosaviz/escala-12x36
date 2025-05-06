@@ -19,7 +19,9 @@ import { RouterModule, Routes } from '@angular/router';
     DayoffsRoutingModule,
     CommonModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    FormComponent,     // ✅ importar componente standalone
+    ListComponent      // ✅ importar componente standalone
   ]
 })
 export class DayoffsModule { }
