@@ -1,37 +1,118 @@
-.full-width-table {
-  width: 100%;
-  margin-top: 20px;
+
+.employee-list {
+  max-width: 1000px;
+  margin: 30px auto;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #05050522;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
 
-.mat-header-cell {
-  background-color: #3f51b5;
+/* Toolbar */
+.employee-list .toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.employee-list .toolbar h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #4a4a4a; /*  */
+  font-weight: bold;
+}
+
+.employee-list .toolbar button {
+  background-color: #04AA6D;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.employee-list .toolbar button:hover {
+  background-color: #039f5b;
+}
+
+/* Tabela */
+.full-width-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.full-width-table th, 
+.full-width-table td {
+  border: 1px solid #120f0f3a;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.full-width-table tr:nth-child(even) {
+  background-color: #1e1a3e15;
+}
+
+.full-width-table tr:hover {
+  background-color: #ddd;
+}
+
+/* Cabeçalho */
+.full-width-table th {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  background-color: #232851;
   color: white;
   font-weight: bold;
-  text-align: center;
 }
 
-.mat-cell {
-  text-align: center;
-  padding: 8px;
-}
-
-.mat-header-row, .mat-row {
-  border-bottom: 1px solid #ddd;
-}
-
-.mat-row:hover {
-  background-color: #f1f1f1;
+/* Botões de ação */
+td.mat-cell button.mat-icon-button {
+  background: transparent;
+  border: none;
   cursor: pointer;
+  margin-right: 6px;
+  color: #04AA6D;
+  transition: color 0.3s ease;
 }
 
-
-.mat-icon-button {
-  padding: 8px;
-  border-radius: 4px;
+td.mat-cell button.mat-icon-button:hover {
+  color: #027a4d;
 }
 
-.mat-icon-button:hover {
-  background-color: #e0e0e0;
+/* Ícones */
+td.mat-cell button.mat-icon-button mat-icon {
+  font-size: 20px;
 }
 
+/* Responsividade simples */
+@media (max-width: 768px) {
+  .employee-list {
+    padding: 15px;
+  }
 
+  .employee-list .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .employee-list .toolbar button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .full-width-table th,
+  .full-width-table td {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+}
