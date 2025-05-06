@@ -1,12 +1,20 @@
 <div class="shift-list">
   <div class="toolbar">
     <h2>Lista de Turnos</h2>
-    <!-- Botão opcional -->
+    <!-- Botão opcional para adicionar novo turno (se necessário) -->
   </div>
 
-  <div *ngIf="isLoading">Carregando turnos...</div>
-  <div *ngIf="error" class="error">{{ error }}</div>
+  <!-- Exibição do carregamento -->
+  <div *ngIf="isLoading" class="loading">
+    Carregando turnos...
+  </div>
+  
+  <!-- Exibição de erro -->
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
 
+  <!-- Tabela de turnos -->
   <table *ngIf="schedules.length > 0" class="full-width-table">
     <thead>
       <tr>
@@ -16,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let schedule of schedules">
+      <tr *ngFor="let schedule of paginatedSchedules">
         <td>{{ schedule.employeeName || 'Não informado' }}</td>
         <td>{{ schedule.shift_date | date: 'dd/MM/yyyy' }}</td>
         <td>{{ schedule.shift_type === 'DAY' ? 'Diurno' : 'Noturno' }}</td>
@@ -24,7 +32,17 @@
     </tbody>
   </table>
 
-  <div *ngIf="!isLoading && schedules.length === 0">
+  <!-- Exibição de mensagem quando não houver turnos -->
+  <div *ngIf="!isLoading && schedules.length === 0" class="no-schedules">
     Nenhum turno encontrado.
   </div>
+
+  <!-- Paginação -->
+  <mat-paginator 
+    *ngIf="schedules.length > 0" 
+    [length]="schedules.length" 
+    [pageSize]="pageSize" 
+    [pageIndex]="currentPage" 
+    (page)="onPageChange($event)">
+  </mat-paginator>
 </div>

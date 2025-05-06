@@ -6,15 +6,6 @@ import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
 
 
 
-
-
-
-
-
-
-
-
-
 @Component({
   standalone: true,
   selector: 'app-view',
@@ -22,22 +13,19 @@ import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
   styleUrls: ['./view.component.scss'],
   imports: [
     CommonModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+  
   ]  // 🔥 necessário para pipes como 'date'
 })
 export class ViewComponent implements OnInit {
   schedules: Schedule[] = [];
   isLoading = false;
   error: string | null = null;
-  currentPage = 0;
-  pageSize = 5;
 
-  // Método para retornar os turnos paginados
-  get paginatedSchedules(): Schedule[] {
-    const startIndex = this.currentPage * this.pageSize;
-    return this.schedules.slice(startIndex, startIndex + this.pageSize);
-  }
+  currentPage = 0;  // Página inicial
+  pageSize = 30;     // Itens por página
 
+  
 
 
   constructor(private scheduleService: ScheduleService) { }
@@ -62,11 +50,18 @@ export class ViewComponent implements OnInit {
       }
     });
   }
-
-  // Quando a página muda
+  
+  // Método para tratar a mudança de página
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
   }
+  // Computa a lista de turnos paginados
+  get paginatedSchedules(): Schedule[] {
+    const startIndex = this.currentPage * this.pageSize;
+    return this.schedules.slice(startIndex, startIndex + this.pageSize);
+  }
+
+
 }
 
