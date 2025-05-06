@@ -1,28 +1,30 @@
-<div class="container">
-    <h2>Turnos da Escala</h2>
-  
-    <div *ngIf="isLoading">Carregando turnos...</div>
-    <div *ngIf="error" class="error">{{ error }}</div>
-  
-    <table *ngIf="schedules.length > 0" class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Funcionário</th>
-          <th>Data</th>
-          <th>Turno</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let schedule of schedules">
-          <td>{{ schedule.employeeName || 'Não informado' }}</td>
-          <td>{{ schedule.shift_date | date: 'dd/MM/yyyy' }}</td>
-          <td>{{ schedule.shift_type === 'DAY' ? 'Diurno' : 'Noturno' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <div *ngIf="!isLoading && schedules.length === 0">
-      Nenhum turno encontrado.
-    </div>
+<div class="shift-list">
+  <div class="toolbar">
+    <h2>Lista de Turnos</h2>
+    <!-- Botão opcional -->
   </div>
-  
+
+  <div *ngIf="isLoading">Carregando turnos...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="schedules.length > 0" class="full-width-table">
+    <thead>
+      <tr>
+        <th>Funcionário</th>
+        <th>Data</th>
+        <th>Turno</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let schedule of schedules">
+        <td>{{ schedule.employeeName || 'Não informado' }}</td>
+        <td>{{ schedule.shift_date | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ schedule.shift_type === 'DAY' ? 'Diurno' : 'Noturno' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!isLoading && schedules.length === 0">
+    Nenhum turno encontrado.
+  </div>
+</div>

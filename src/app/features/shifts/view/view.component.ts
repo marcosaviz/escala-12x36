@@ -1,7 +1,18 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { ScheduleService } from 'src/app/core/services/schedule.service';   
+import { ScheduleService } from 'src/app/core/services/schedule.service';
 import { Schedule } from 'src/app/models/schedule.model';
 import { CommonModule } from '@angular/common';
+import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
+
+
+
+
+
+
+
+
+
+
 
 
 @Component({
@@ -9,20 +20,33 @@ import { CommonModule } from '@angular/common';
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.scss'],
-  imports: [CommonModule]  // 🔥 necessário para pipes como 'date'
-
+  imports: [
+    CommonModule,
+    MatPaginatorModule
+  ]  // 🔥 necessário para pipes como 'date'
 })
 export class ViewComponent implements OnInit {
   schedules: Schedule[] = [];
   isLoading = false;
   error: string | null = null;
+  currentPage = 0;
+  pageSize = 5;
 
-  constructor(private scheduleService: ScheduleService) {}
+  // Método para retornar os turnos paginados
+  get paginatedSchedules(): Schedule[] {
+    const startIndex = this.currentPage * this.pageSize;
+    return this.schedules.slice(startIndex, startIndex + this.pageSize);
+  }
+
+
+
+  constructor(private scheduleService: ScheduleService) { }
 
   ngOnInit(): void {
     this.loadSchedules();
   }
 
+  // Carrega os turnos
   loadSchedules(): void {
     this.isLoading = true;
     this.scheduleService.list().subscribe({
@@ -38,4 +62,11 @@ export class ViewComponent implements OnInit {
       }
     });
   }
+
+  // Quando a página muda
+  onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
 }
+
