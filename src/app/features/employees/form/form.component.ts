@@ -86,7 +86,7 @@ export class FormComponent implements OnInit {
         : this.employeeService.create(payload);
   
       request.subscribe({
-        next: () => this.router.navigate(['/employees/list']), // ✅ rota corrigida
+        next: () => this.router.navigate(['/employees']), // ✅ rota corrigida
         error: (err) => {
           console.error('Erro ao salvar os dados:', err);
           alert('Erro ao salvar os dados. Por favor, tente novamente.');

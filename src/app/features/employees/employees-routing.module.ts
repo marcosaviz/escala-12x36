@@ -9,9 +9,9 @@ const routes: Routes = [
     path: '',
     component: EmployeesComponent,
     children: [
-      { path: '', component: ListComponent }, // Listar funcionários
-      { path: 'new', component: FormComponent }, // Criar novo funcionário
-      { path: 'edit/:id', component: FormComponent } // Editar funcionário existente
+      { path: '', component: ListComponent },         // Acessível via /employees/
+      { path: 'new', component: FormComponent },     // Acessível via /employees/new
+      { path: 'edit/:id', component: FormComponent } // Acessível via /employees/edit/:id
     ]
   }
 ];
