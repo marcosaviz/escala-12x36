@@ -1,12 +1,11 @@
 import { Component, ViewEncapsulation, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
-import { FullCalendarModule, FullCalendarComponent } from '@fullcalendar/angular';
+//import { FullCalendarModule } from '@fullcalendar/angular';  // Certifique-se de que isso está aqui
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { ScheduleService } from 'src/app/core/services/schedule.service';
 import { Schedule } from 'src/app/models/schedule.model';
-import {ToastrService} from 'ngx-toastr'; 
-
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-calendar',
@@ -14,7 +13,7 @@ import {ToastrService} from 'ngx-toastr';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [FullCalendarModule, ToastrService]
+  imports: [FullCalendarModule]  // Certifique-se de que o FullCalendarModule está importado aqui
 })
 export class CalendarComponent implements OnInit {
   @ViewChild('fullcalendar') calendarComponent!: FullCalendarComponent;
@@ -24,7 +23,7 @@ export class CalendarComponent implements OnInit {
     private scheduleService: ScheduleService,
     private cdr: ChangeDetectorRef,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.calendarOptions = {
@@ -69,12 +68,26 @@ export class CalendarComponent implements OnInit {
 
     this.scheduleService.generate(start_date_iso, end_date_iso).subscribe({
       next: () => {
-        alert('Escala gerada com sucesso!');
+        this.toastr.success('Escala gerada com sucesso!', 'Sucesso');
         this.loadSchedules();
       },
       error: (err) => {
         console.error('Erro ao gerar escala:', err);
-        alert('Erro ao gerar escala. Verifique o servidor.');
+        this.toastr.error('Erro ao gerar escala. Verifique o servidor.', 'Erro');
+      }
+    });
+  }
+
+  // Função para apagar todas as escalas
+  deleteAllSchedules(): void {
+    this.scheduleService.deleteAllSchedules().subscribe({
+      next: () => {
+        this.toastr.success('Todas as escalas foram apagadas!', 'Sucesso');
+        this.loadSchedules();
+      },
+      error: (err) => {
+        console.error('Erro ao apagar escalas:', err);
+        this.toastr.error('Erro ao apagar escalas. Verifique o servidor.', 'Erro');
       }
     });
   }
