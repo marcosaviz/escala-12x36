@@ -112,3 +112,13 @@
   border: 2px dashed red;
   min-height: 500px;
 }
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+  margin: 5px;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}

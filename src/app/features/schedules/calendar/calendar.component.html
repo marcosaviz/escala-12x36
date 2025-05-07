@@ -1,7 +1,9 @@
 <div class="schedule-calendar">
     <h2>Escala 12x36</h2>
     <button mat-raised-button color="primary" (click)="generateSchedule()">Gerar Escala</button>
-  
+    <button (click)="deleteAllSchedules()" class="btn btn-danger">
+      Apagar Escala
+    </button>
     <full-calendar #fullcalendar [options]="calendarOptions"></full-calendar>
   </div>
   

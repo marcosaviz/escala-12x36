@@ -65,4 +65,15 @@ export class ScheduleService {
       })
     );
   }
+
+  // Método para apagar toda a escala
+  deleteAllSchedules(): Observable<void> {
+    return this.http.delete<void>(`${this.API}/delete`).pipe(
+      catchError((error) => {
+        console.log('Erro ao apagar a escala', error);
+        return throwError(error);
+      })
+    );
+  }
+  
 }

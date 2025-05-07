@@ -4,6 +4,7 @@ import { FullCalendarModule, FullCalendarComponent } from '@fullcalendar/angular
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { ScheduleService } from 'src/app/core/services/schedule.service';
 import { Schedule } from 'src/app/models/schedule.model';
+import {ToastrService} from 'ngx-toastr'; 
 
 
 
@@ -13,7 +14,7 @@ import { Schedule } from 'src/app/models/schedule.model';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [FullCalendarModule]
+  imports: [FullCalendarModule, ToastrService]
 })
 export class CalendarComponent implements OnInit {
   @ViewChild('fullcalendar') calendarComponent!: FullCalendarComponent;
@@ -21,7 +22,8 @@ export class CalendarComponent implements OnInit {
 
   constructor(
     private scheduleService: ScheduleService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
