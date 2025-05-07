@@ -9,6 +9,7 @@
   transition: all 0.3s ease;
   font-weight: 600;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 15px;
 
   &:hover {
     background: linear-gradient(135deg, #388e3c, #66bb6a);
@@ -21,6 +22,34 @@
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
   }
 }
+
+
+.btn-danger {
+  background: linear-gradient(135deg, #b30303, #b30303);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 15px;
+
+  &:hover {
+    background: linear-gradient(135deg, #c00202b3, #c00202b3);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
 
 
 .schedule-calendar {
@@ -111,14 +140,4 @@
 :host ::ng-deep .fc {
   border: 2px dashed red;
   min-height: 500px;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-  color: #fff;
-  margin: 5px;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
 }
