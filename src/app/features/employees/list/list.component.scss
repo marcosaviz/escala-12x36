@@ -20,19 +20,20 @@
 .employee-list .toolbar h2 {
   margin: 0;
   font-size: 1.8rem;
-  color: #4a4a4a; /*  */
+  color: #030303; /*  */
   font-weight: bold;
 }
 
 .employee-list .toolbar button {
   background-color: #04AA6D;
   color: white;
-  border: none;
+  border: 0;
+  margin-left: auto;
   padding: 10px 18px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -47,22 +48,24 @@
 .full-width-table {
   border-collapse: collapse;
   width: 100%;
-  font-size: 1rem;
+  font-size: 5rem;
+  background-color: #4646460f;
+  
 }
 
-.full-width-table th, 
-.full-width-table td {
-  border: 1px solid #120f0f3a;
+.full-width-table th, .full-width-table td {
+  border: 10px solid #faf7f73a;
   padding: 10px 12px;
-  text-align: left;
-}
-
-.full-width-table tr:nth-child(even) {
-  background-color: #1e1a3e15;
+  text-align: center;
+  border-style: solid;
 }
 
 .full-width-table tr:hover {
   background-color: #ddd;
+}
+
+.full-width-table tr:nth-child(even) {
+  background-color: #e7e6ed15;
 }
 
 /* Cabeçalho */
