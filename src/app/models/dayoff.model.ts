@@ -1,6 +1,6 @@
-export interface DayOff {
-    id?: number;
-    employeeId: number;
-    date: string;
-    reason?: string; // Opcional, para dizer se é folga normal ou aniversário
-  }
+
+  export interface DayOff {
+  employee_id: number;
+  day: string;
+  reason?: string; 
+}

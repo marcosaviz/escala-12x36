@@ -1,5 +1,5 @@
 <div class="dayoff-form">
-  <h2>{{ dayOffId ? 'Editar Folga' : 'Adicionar Folga' }}</h2>
+  <h2>{{ isEditMode  ? 'Editar Folga' : 'Adicionar Folga' }}</h2>
 
   <form [formGroup]="dayOffForm" (ngSubmit)="onSubmit()">
     <div class="form-fields">
@@ -38,7 +38,7 @@
     <!-- Ações -->
     <div class="form-actions">
       <button mat-raised-button color="primary" type="submit" [disabled]="dayOffForm.invalid">
-        {{ dayOffId ? 'Atualizar' : 'Salvar' }}
+        {{ isEditMode  ? 'Atualizar' : 'Salvar' }}
       </button>
     </div>
   </form>

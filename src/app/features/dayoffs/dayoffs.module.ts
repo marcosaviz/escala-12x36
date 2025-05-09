@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { ListComponent } from './list/list.component'; // Ajuste o caminho certinho
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -20,8 +19,8 @@ import { RouterModule, Routes } from '@angular/router';
     CommonModule,
     MatTableModule,
     MatButtonModule,
-    FormComponent,     // ✅ importar componente standalone
-    ListComponent      // ✅ importar componente standalone
+    // ✅ importar componente standalone
+          // ✅ importar componente standalone
   ]
 })
 export class DayoffsModule { }

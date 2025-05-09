@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, pipe, throwError  } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { DayOff } from 'src/app/models/dayoff.model';
 import { environment } from 'src/environments/environment';
 
@@ -12,27 +13,44 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class DayOffService {
-  //private readonly API = '/api/dayoffs';
   private readonly API = `${environment.apiUrl}/api/dayoffs`;
+
   constructor(private http: HttpClient) {}
 
+
   list(): Observable<DayOff[]> {
-    return this.http.get<DayOff[]>(this.API);
+    return this.http.get<DayOff[]>(this.API).pipe(
+      catchError(this.handleError)
+    );
   }
 
   findById(id: number): Observable<DayOff> {
-    return this.http.get<DayOff>(`${this.API}/${id}`);
+    return this.http.get<DayOff>(`${this.API}/${id}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   create(dayOff: DayOff): Observable<DayOff> {
-    return this.http.post<DayOff>(this.API, dayOff);
+    return this.http.post<DayOff>(this.API, dayOff).pipe(
+      catchError(this.handleError)
+    );
   }
 
   update(id: number, dayOff: DayOff): Observable<DayOff> {
-    return this.http.put<DayOff>(`${this.API}/${id}`, dayOff);
+    return this.http.put<DayOff>(`${this.API}/${id}`, dayOff).pipe(
+      catchError(this.handleError)
+    );
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.API}/${id}`);
+    return this.http.delete<void>(`${this.API}/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  private handleError(error: any) {
+    console.error('Ocorreu um erro:' , error);
+    return throwError('Erro ao se comunicar com o servidor. Tente novamente mais tarde.');
   }
 }

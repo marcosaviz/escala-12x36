@@ -6,10 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from 'src/app/core/services/employee.service';
-import { CreateEmployeeDto } from 'src/app/models/create-employee.dto';  // Importando o DTO para criação
-import { Employee } from 'src/app/models/employee.model';
-import { UpdateEmployeeDto } from 'src/app/models/update-employee.dto';
-
+//import { CreateEmployeeDto } from 'src/app/models/create-employee.dto';  // Importando o DTO para criação
 
 
 @Component({

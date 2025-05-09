@@ -2,10 +2,10 @@
   <div class="dayoffs-header">
     <h2>Folgas</h2>
     <button mat-raised-button color="primary" routerLink="/dayoffs/new">Adicionar Folga</button>
-  </div>
+  </div> 
 
   <table mat-table [dataSource]="dayOffs">
-    <!-- Coluna: Funcionário ID -->
+    <!-- Coluna: Funcionário ID --> 
     <ng-container matColumnDef="employeeId">
       <th mat-header-cell *matHeaderCellDef>Funcionário ID</th>
       <td mat-cell *matCellDef="let dayOff">{{ dayOff.employeeId }}</td>
@@ -17,13 +17,13 @@
       <td mat-cell *matCellDef="let dayOff">{{ dayOff.date | date }}</td>
     </ng-container>
 
-    <!-- Coluna: Motivo -->
+    <!-- Coluna: Motivo --> 
     <ng-container matColumnDef="reason">
       <th mat-header-cell *matHeaderCellDef>Motivo</th>
       <td mat-cell *matCellDef="let dayOff">{{ dayOff.reason || 'Folga' }}</td>
     </ng-container>
 
-    <!-- Coluna: Ações -->
+     Coluna: Ações 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let dayOff">
@@ -36,3 +36,6 @@
     <tr mat-row *matRowDef="let row; columns: ['employeeId', 'date', 'reason', 'actions'];"></tr>
   </table>
 </div>
+
+
+
