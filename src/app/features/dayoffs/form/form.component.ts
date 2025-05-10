@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DayOffService } from 'src/app/core/services/dayoff.service';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { DayOff } from 'src/app/models/dayoff.model';
+
 // Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -15,6 +16,18 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+
+// Formato de data desejado
+export const MY_DATE_FORMATS = {
+  parse: { dateInput: 'DD/MM/YYYY' },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MM YYYY',
+  },
+};
 
 interface Employee {
   id: number;
@@ -26,6 +39,10 @@ interface Employee {
   selector: 'app-dayoff-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }, // Padrão brasileiro
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }, // Formato personalizado
+  ],
   encapsulation: ViewEncapsulation.None,
   imports: [
     CommonModule,
@@ -39,15 +56,16 @@ interface Employee {
     MatDatepickerModule,
     MatNativeDateModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
-  ]
+    MatProgressSpinnerModule,
+  ],
 })
+
 export class FormComponent implements OnInit {
   dayOffForm: FormGroup;
   dayOffId?: number;
-  isEditMode: boolean = false;
+  isEditMode = false;
   employees: Employee[] = [];
-  isLoading: boolean = false;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -59,62 +77,63 @@ export class FormComponent implements OnInit {
   ) {
     this.dayOffForm = this.fb.group({
       employeeId: [null, Validators.required],
-      date: [new Date(), [Validators.required]],
-      reason: ['']
+      date: [new Date(), Validators.required],
+      reason: [''],
     });
   }
 
   ngOnInit() {
-    // Captura o ID da rota
-    this.route.paramMap.subscribe(params => {
+    this.loadDayOff();
+    this.loadEmployees();
+  }
+
+  private loadDayOff() {
+    this.route.paramMap.subscribe((params) => {
       const idParam = params.get('id');
       if (idParam) {
         this.isEditMode = true;
-        this 
         this.dayOffId = +idParam;
-        console.log('Editando folga com ID:', this.dayOffId); // Verifique se o ID está correto
 
-        // Chamada para buscar os dados da folga pelo ID
         this.dayOffService.findById(this.dayOffId).subscribe({
           next: (dayOff) => {
-            console.log('Folga encontrada:' , dayOff); //Verifica se os dados estão corretos
             if (dayOff) {
-              console.log('Folga carregada para edição:' , dayOff);
-              // Preenche o formulário com os valores da folga
+              const formattedDate = new Date(dayOff.day);
               this.dayOffForm.patchValue({
                 employeeId: dayOff.employee_id,
-                date: new Date(dayOff.day),
-                reason: dayOff.reason
-                });
+                date: formattedDate,
+                reason: dayOff.reason,
+              });
             }
-        },
-        error: (err) => {
-          console.error('Erro ao buscar folga:', err);
-          this.snackBar.open('Erro ao carregar folga', 'Fechar', { duration: 3000});
-        }
-      });
-    }
-  });
-    // Carrega a lista de funcionários
-  this.isLoading = true;
-  this.employeeService.list().subscribe({
-    next: (data) => {
-      this.employees = data;
-      this.isLoading = false;
-    },
-    error: () => {
-      this.isLoading = false;
-      this.snackBar.open('Erro ao carregar funcionários', 'Fechar', { duration: 3000 });
-    }
-  });
-}
+          },
+          error: (err) => {
+            console.error('Erro ao buscar folga:', err);
+            this.showErrorMessage('Erro ao carregar folga');
+          },
+        });
+      }
+    });
+  }
+
+  private loadEmployees() {
+    this.isLoading = true;
+    this.employeeService.list().subscribe({
+      next: (data) => {
+        this.employees = data;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+        this.showErrorMessage('Erro ao carregar funcionários');
+      },
+    });
+  }
 
   private formatDate(date: any): string {
     if (date instanceof Date) {
-      return date.toISOString();
+      return date.toISOString().split('T')[0]; // Formato: yyyy-MM-dd
     } else if (typeof date === 'string') {
       const formattedDate = new Date(date);
-      return isNaN(formattedDate.getTime()) ? '' : formattedDate.toISOString();
+      return isNaN(formattedDate.getTime()) ? '' : formattedDate.toISOString().split('T')[0];
     }
     return '';
   }
@@ -125,36 +144,40 @@ export class FormComponent implements OnInit {
       const dayoffData: DayOff = {
         employee_id: formValues.employeeId,
         day: this.formatDate(formValues.date),
-        reason: formValues.reason
+        reason: formValues.reason,
       };
 
-
-      //  // Escolhe entre criar ou atualizar com base no modo de edição
-        const request = this.isEditMode
-          ? this.dayOffService.update(this.dayOffId!, dayoffData) // Use o id diretamente do form
-          : this.dayOffService.create(dayoffData);
+      const request = this.isEditMode
+        ? this.dayOffService.update(this.dayOffId!, dayoffData)
+        : this.dayOffService.create(dayoffData);
 
       request.subscribe({
         next: () => {
-          this.snackBar.open(
-            this.isEditMode ? 'Folga registrada com sucesso!' : 'Folga criada com sucesso!', 
-            'Fechar',
-            { duration: 3000 }
+          this.showSuccessMessage(
+            this.isEditMode ? 'Folga registrada com sucesso!' : 'Folga criada com sucesso!'
           );
-
           this.router.navigate(['/dayoffs']);
         },
-
         error: (err) => {
           console.error('Erro ao salvar folga:', err);
-          this.snackBar.open('Erro ao salvar folga: ' + (err.error?.message || 'Erro desconhecido'), 'Fechar', { duration: 3000 });
-        }
+          this.showErrorMessage(
+            'Erro ao salvar folga: ' + (err.error?.message || 'Erro desconhecido')
+          );
+        },
       });
     }
   }
 
   onCancel() {
     this.router.navigate(['/dayoffs']);
+  }
+
+  private showErrorMessage(message: string) {
+    this.snackBar.open(message, 'Fechar', { duration: 3000 });
+  }
+
+  private showSuccessMessage(message: string) {
+    this.snackBar.open(message, 'Fechar', { duration: 3000 });
   }
 
   filterValidDate = (date: Date | null): boolean => {
