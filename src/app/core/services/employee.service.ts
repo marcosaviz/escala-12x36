@@ -12,28 +12,28 @@ import { UpdateEmployeeDto } from 'src/app/models/update-employee.dto';
 
 
 export class EmployeeService {
-  private readonly API = `${environment.apiUrl}/api/employees`;
+  private readonly apiUrl = `${environment.apiUrl}/api/employees`;
 
   constructor(private http: HttpClient) {}
 
   list(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.API);
+    return this.http.get<Employee[]>(this.apiUrl);
   }
 
   findById(id: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.API}/${id}`);
+    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
   }
 
   create(employee: CreateEmployeeDto): Observable<Employee> {
-    return this.http.post<Employee>(this.API, employee);
+    return this.http.post<Employee>(this.apiUrl, employee);
   }
 
   update(id: number, employee: UpdateEmployeeDto): Observable<Employee> {
-    return this.http.put<Employee>(`${this.API}/${id}`, employee);
+    return this.http.put<Employee>(`${this.apiUrl}/${id}`, employee);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.API}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
 

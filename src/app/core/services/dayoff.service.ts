@@ -13,37 +13,37 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class DayOffService {
-  private readonly API = `${environment.apiUrl}/api/dayoffs`;
+  private readonly apiUrl = `${environment.apiUrl}/api/dayoffs`;
 
   constructor(private http: HttpClient) {}
 
 
   list(): Observable<DayOff[]> {
-    return this.http.get<DayOff[]>(this.API).pipe(
+    return this.http.get<DayOff[]>(this.apiUrl).pipe(
       catchError(this.handleError)
     );
   }
 
   findById(id: number): Observable<DayOff> {
-    return this.http.get<DayOff>(`${this.API}/${id}`).pipe(
+    return this.http.get<DayOff>(`${this.apiUrl}/${id}`).pipe(
       catchError(this.handleError)
     );
   }
 
   create(dayOff: DayOff): Observable<DayOff> {
-    return this.http.post<DayOff>(this.API, dayOff).pipe(
+    return this.http.post<DayOff>(this.apiUrl, dayOff).pipe(
       catchError(this.handleError)
     );
   }
 
   update(id: number, dayOff: DayOff): Observable<DayOff> {
-    return this.http.put<DayOff>(`${this.API}/${id}`, dayOff).pipe(
+    return this.http.put<DayOff>(`${this.apiUrl}/${id}`, dayOff).pipe(
       catchError(this.handleError)
     );
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.API}/${id}`).pipe(
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
       catchError(this.handleError)
     );
   }

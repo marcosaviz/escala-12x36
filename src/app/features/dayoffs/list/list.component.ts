@@ -62,8 +62,9 @@ export class ListComponent implements OnInit {
     return employee ? employee.name : 'Funcionário não encontrado';
   }
 
-  // Método para excluir uma folga
+  //Método para excluir uma folga
   deleteDayOff(id: number) {
+    console.log('ID para exclusão:', id); // Verificando o ID
     if (confirm('Tem certeza que deseja excluir esta folga?')) {
       this.dayOffService.delete(id).subscribe({
         next: () => {
@@ -77,6 +78,15 @@ export class ListComponent implements OnInit {
       });
     }
   }
+
+
+ 
+
+
+
+
+
+
 
   // Método para editar uma folga
   editDayOff(id: number) {
