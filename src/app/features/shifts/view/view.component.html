@@ -1,6 +1,6 @@
 <div class="shift-list">
   <div class="toolbar">
-    <h2>Lista de Turnos</h2>
+    <h2>Turnos</h2>
     <!-- Botão opcional para adicionar novo turno (se necessário) -->
   </div>
 
@@ -34,7 +34,7 @@
 
   <!-- Exibição de mensagem quando não houver turnos -->
   <div *ngIf="!isLoading && schedules.length === 0" class="no-schedules">
-    Nenhum turno encontrado.
+    Sem turnos. Gere uma nova escala!.
   </div>
 
   <!-- Paginação -->

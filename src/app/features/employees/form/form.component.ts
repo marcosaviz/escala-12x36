@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from 'src/app/core/services/employee.service';
-//import { CreateEmployeeDto } from 'src/app/models/create-employee.dto';  // Importando o DTO para criação
 
 
 @Component({
@@ -46,10 +45,18 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');
+      console.log('ID do funcionário:', idParam); // Adicione este log
       if (idParam) {
         this.isEditMode = true;
         this.employeeId = +idParam;
         this.employeeService.findById(this.employeeId).subscribe(employee => {
+          if (employee) {
+            this.employeeForm.patchValue(employee);
+          } else {
+            alert('Funcionário não encontrado.');
+            this.router.navigate(['/employee']);
+          }
+          console.log('Dados recebidos para edição:', employee); // Verificação
           this.employeeForm.patchValue(employee);
         });
       }
@@ -64,6 +71,7 @@ export class FormComponent implements OnInit {
   onSubmit(): void {
     if (this.employeeForm.valid) {
       const formValues = this.employeeForm.value;
+      console.log('Dados enviados:',)
       const formattedDate = this.formatDate(formValues.birthDate);
   
       if (!formattedDate) {
@@ -92,7 +100,7 @@ export class FormComponent implements OnInit {
     }
   }
   goToList(): void {
-    this.router.navigate(['/employees/list']);
+    this.router.navigate(['/employees/']);
   }
 
   cancel(): void {

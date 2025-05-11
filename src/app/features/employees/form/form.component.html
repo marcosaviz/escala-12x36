@@ -1,11 +1,5 @@
 <div class="form-container">
     <h2>{{ isEditMode ? 'Editar Funcionário' : 'Novo Funcionário' }}</h2>
-    <!-- Botão de listar acima do formulário -->
-    <div class="top-actions">
-        <button mat-stroked-button color="accent" type="button" (click)="goToList()">
-            Listar Funcionários
-        </button>
-    </div>
     <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
         <!-- Nome -->
         <mat-form-field appearance="outline" class="full-width">
