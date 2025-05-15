@@ -1,1 +1,42 @@
-<p>list works!</p>
+<div class="vacation-list">
+  <div class="vacations-header">
+    <h2>Férias</h2>
+    <button mat-raised-button color="primary" routerLink="/vacations/new">Adicionar Férias</button>
+  </div>
+
+  <table mat-table [dataSource]="vacations" class="vacation-table">
+
+    <!-- Coluna: Funcionário -->
+    <ng-container matColumnDef="employeeName">
+      <th mat-header-cell *matHeaderCellDef>Funcionário</th>
+      <td mat-cell *matCellDef="let vacation">{{ getEmployeeName(vacation.employeeId) }}</td>
+    </ng-container>
+
+    <!-- Coluna: Início -->
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef>Início</th>
+      <td mat-cell *matCellDef="let vacation">{{ vacation.startDate | date: 'dd/MM/yyyy' }}</td>
+    </ng-container>
+
+    <!-- Coluna: Fim -->
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell *matHeaderCellDef>Fim</th>
+      <td mat-cell *matCellDef="let vacation">{{ vacation.endDate | date: 'dd/MM/yyyy' }}</td>
+    </ng-container>
+
+    <!-- Coluna: Ações -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let vacation">
+        <button mat-button color="primary" [routerLink]="['/vacations/edit', vacation.id]">Editar</button>
+        <button mat-button color="warn" (click)="deleteVacation(vacation.id)">Excluir</button>
+      </td>
+    </ng-container>
+
+    <!-- Cabeçalho da Tabela -->
+    <tr mat-header-row *matHeaderRowDef="['employeeName', 'startDate', 'endDate', 'actions']"></tr>
+    <!-- Linhas da Tabela -->
+    <tr mat-row *matRowDef="let row; columns: ['employeeName', 'startDate', 'endDate', 'actions'];"></tr>
+
+  </table>
+</div>

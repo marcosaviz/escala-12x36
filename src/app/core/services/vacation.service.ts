@@ -11,27 +11,26 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class VacationService {
-  //private readonly API = '/api/vacations';
-  private readonly API = `${environment.apiUrl}/api/vacations`;
+  private readonly apiUrl = `${environment.apiUrl}/api/vacations`;
   constructor(private http: HttpClient) {}
 
   list(): Observable<Vacation[]> {
-    return this.http.get<Vacation[]>(this.API);
+    return this.http.get<Vacation[]>(this.apiUrl);
   }
 
   findById(id: number): Observable<Vacation> {
-    return this.http.get<Vacation>(`${this.API}/${id}`);
+    return this.http.get<Vacation>(`${this.apiUrl}/${id}`);
   }
 
   create(vacation: Vacation): Observable<Vacation> {
-    return this.http.post<Vacation>(this.API, vacation);
+    return this.http.post<Vacation>(this.apiUrl, vacation);
   }
 
   update(id: number, vacation: Vacation): Observable<Vacation> {
-    return this.http.put<Vacation>(`${this.API}/${id}`, vacation);
+    return this.http.put<Vacation>(`${this.apiUrl}/${id}`, vacation);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.API}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

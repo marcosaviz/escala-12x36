@@ -78,16 +78,6 @@ export class ListComponent implements OnInit {
       });
     }
   }
-
-
- 
-
-
-
-
-
-
-
   // Método para editar uma folga
   editDayOff(id: number) {
     console.log('Editando folga com ID:', id);
