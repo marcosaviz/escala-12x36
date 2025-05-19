@@ -1,5 +1,33 @@
 # Escala12x36
 
+RUN:
+```bash
+npm install
+```
+Esse comando vai: 
+Ler seu package.json e package-lock.json, 
+Baixar e instalar todas as dependências necessárias
+Criar a pasta node_modules, com tudo que o projeto precisa para rodar
+
+
+EM CASO DE ERRO: 
+1. Limpar o node_modules e o cache do npm
+Primeiro, limpe o diretório node_modules e o cache do npm para garantir que não haja arquivos corrompidos ou problemas de permissões. Execute os seguintes comandos:
+
+```bash
+rm -rf node_modules
+rm package-lock.json
+npm cache clean --force
+
+```
+
+
+Depois disso, tente rodar o comando npm install novamente:
+```bash
+npm install
+```
+
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
 
 ## Development server
