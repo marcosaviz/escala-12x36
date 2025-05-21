@@ -22,7 +22,7 @@ export class ScheduleService {
     return this.http.get<Schedule[]>(this.API).pipe(
       catchError((error)=> {
         console.log('Erro ao obter os turnos', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     )
   }
@@ -31,7 +31,7 @@ export class ScheduleService {
     return this.http.post<Schedule>(this.API, schedule).pipe(
       catchError((error)=>  {
         console.log('Erro ao adicionar turno', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     )
   }
@@ -41,7 +41,7 @@ export class ScheduleService {
     return this.http.put<Schedule>(`${this.API}/${schedule.id}`, schedule).pipe(
       catchError((error)=> {
         console.log('Erro ao atualizar turno', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     )
   }
@@ -51,7 +51,7 @@ export class ScheduleService {
     return this.http.delete<void>(`${this.API}/${id}`).pipe(
       catchError((error)=> {
         console.log('Erro ao excluir turno', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     )
   }
@@ -61,7 +61,7 @@ export class ScheduleService {
     return this.http.post<void>(`${this.API}/generate`, { start_date, end_date }).pipe(
       catchError((error)=> {
         console.log('Erro ao gerar os turnos', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }
@@ -71,7 +71,7 @@ export class ScheduleService {
     return this.http.delete<void>(`${this.API}/delete`).pipe(
       catchError((error) => {
         console.log('Erro ao apagar a escala', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }

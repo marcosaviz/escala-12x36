@@ -51,6 +51,6 @@ export class DayOffService {
 
   private handleError(error: any) {
     console.error('Ocorreu um erro:' , error);
-    return throwError('Erro ao se comunicar com o servidor. Tente novamente mais tarde.');
+    return throwError(() => 'Erro ao se comunicar com o servidor. Tente novamente mais tarde.');
   }
 }
