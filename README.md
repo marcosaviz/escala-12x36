@@ -23,7 +23,9 @@ O sistema permite a criação, visualização e gerenciamento de escalas de form
    cd escala-12x36
 
 ## Instale as dependências:
+```bash
 npm install
+```
 Este comando irá:
 
 Ler os arquivos package.json e package-lock.json.
@@ -31,32 +33,36 @@ Baixar e instalar todas as dependências necessárias.
 Criar a pasta node_modules com todos os pacotes necessários para o projeto.
 
 ## Execute o aplicativo:
+```bash
 ng serve
+```
 O aplicativo estará disponível em http://localhost:4200/
 
 ## Solução de Problemas
 Caso encontre erros durante a instalação ou execução, siga os passos abaixo para limpar o ambiente e reinstalar as dependências:
 Remova a pasta node_modules e o arquivo package-lock.json:
 
-bash
 
+```bash
 rm -rf node_modules
 rm package-lock.json
+```
 Limpe o cache do npm:
 
-bash
 
+```bash
 npm cache clean --force
+```
 Reinstale as dependências:
 
-bash
-
+```bash
 npm install
+```
 
 ## Estrutura do Projeto
 📁 Estrutura do Projeto
-bash
 
+```bash
 escala-12x36/
 ├── src/                 # Código-fonte do aplicativo
 ├── public/              # Arquivos públicos
@@ -65,5 +71,6 @@ escala-12x36/
 ├── package.json         # Dependências e scripts do projeto
 ├── tsconfig.json        # Configuração do TypeScript
 └── README.md            # Documentação do projeto
+```
 📄 Licença
 Este projeto está licenciado sob a MIT License.
