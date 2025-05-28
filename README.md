@@ -1,87 +1,69 @@
-# Escala12x36
+# Escala 12x36
 
-RUN:
-```bash
+Aplicativo web para gerenciamento de escalas de trabalho no formato 12x36, desenvolvido com Angular.
+
+## 📋 Descrição
+
+O **Escala 12x36** é uma ferramenta destinada a facilitar o planejamento e controle de jornadas de trabalho no regime 12x36, comum em áreas como saúde, segurança e indústria.  
+O sistema permite a criação, visualização e gerenciamento de escalas de forma eficiente e intuitiva.
+
+## 🚀 Tecnologias Utilizadas
+
+- [Angular](https://angular.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+
+## ⚙️ Instalação e Execução
+
+1. **Clone o repositório:**
+
+   ```bash
+   git clone https://github.com/marcosaviz/escala-12x36.git
+   cd escala-12x36
+
+## Instale as dependências:
 npm install
-```
-Esse comando vai: 
-Ler seu package.json e package-lock.json, 
-Baixar e instalar todas as dependências necessárias
-Criar a pasta node_modules, com tudo que o projeto precisa para rodar
+Este comando irá:
 
+Ler os arquivos package.json e package-lock.json.
+Baixar e instalar todas as dependências necessárias.
+Criar a pasta node_modules com todos os pacotes necessários para o projeto.
 
-EM CASO DE ERRO: 
-1. Limpar o node_modules e o cache do npm
-Primeiro, limpe o diretório node_modules e o cache do npm para garantir que não haja arquivos corrompidos ou problemas de permissões. Execute os seguintes comandos:
+## Execute o aplicativo:
+ng serve
+O aplicativo estará disponível em http://localhost:4200/
 
-```bash
+## Solução de Problemas
+Caso encontre erros durante a instalação ou execução, siga os passos abaixo para limpar o ambiente e reinstalar as dependências:
+Remova a pasta node_modules e o arquivo package-lock.json:
+
+bash
+
 rm -rf node_modules
 rm package-lock.json
+Limpe o cache do npm:
+
+bash
+
 npm cache clean --force
+Reinstale as dependências:
 
-```
+bash
 
-
-Depois disso, tente rodar o comando npm install novamente:
-```bash
 npm install
-```
 
+## Estrutura do Projeto
+📁 Estrutura do Projeto
+bash
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
-
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+escala-12x36/
+├── src/                 # Código-fonte do aplicativo
+├── public/              # Arquivos públicos
+├── .vscode/             # Configurações do Visual Studio Code
+├── angular.json         # Configuração do Angular CLI
+├── package.json         # Dependências e scripts do projeto
+├── tsconfig.json        # Configuração do TypeScript
+└── README.md            # Documentação do projeto
+📄 Licença
+Este projeto está licenciado sob a MIT License.
