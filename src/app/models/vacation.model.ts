@@ -1,6 +1,6 @@
 export interface Vacation {
     id?: number;
-    employeeId: number;
-    startDate: string;
-    endDate: string;
+    employee_id: number;
+    start_date: string;
+    end_date: string;
   }

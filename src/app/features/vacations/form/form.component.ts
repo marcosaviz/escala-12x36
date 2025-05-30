@@ -76,9 +76,9 @@ export class FormComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.vacationForm = this.fb.group({
-      employeeId: [null, Validators.required],
-      date: [new Date(), Validators.required],
-      reason: [''],
+      employeeId: [null , Validators.required],
+      startDate:  [null , Validators.required],
+      endDate:    [null , Validators.required]
     });
   }
 
@@ -97,11 +97,12 @@ export class FormComponent implements OnInit {
         this.vacationService.findById(this.vacationId).subscribe({
           next: (vacation) => {
             if (vacation) {
-              const formattedStartDate = new Date(vacation.startDate);
-              const formattedEndDate = new Date(vacation.endDate);
+              const formattedStartDate = new Date(vacation.start_date);
+              const formattedEndDate = new Date(vacation.end_date);
               this.vacationForm.patchValue({
-                employeeId: vacation.employeeId,
-                date: formattedStartDate, formattedEndDate
+                employeeId: vacation.employee_id,
+                startDate: formattedStartDate,
+                endDate: formattedEndDate
               });
             }
           },
@@ -141,11 +142,19 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     if (this.vacationForm.valid) {
+      const { startDate, endDate } = this.vacationForm.value;
+      if (new Date(endDate) <= new Date(startDate)){
+        this.showErrorMessage('A data de termino deve ser superior à data de início');
+        return;
+      }
+
       const formValues = this.vacationForm.value;
-      const vacationData: Vacation = {
-        employeeId: formValues.employeeId,
-        startDate: this.formatDate(formValues.startDate),
-        endDate: this.formatDate(formValues.endDate)
+
+      const vacationData = {
+        employee_id: this.vacationForm.value.employeeId,
+        start_date: this.formatDate(startDate),
+        end_date: this.formatDate(endDate),
+        //...(this.isEditMode && { id: this.vacationId! })
         
       };
 
@@ -156,14 +165,14 @@ export class FormComponent implements OnInit {
       request.subscribe({
         next: () => {
           this.showSuccessMessage(
-            this.isEditMode ? 'Folga registrada com sucesso!' : 'Folga criada com sucesso!'
+            this.isEditMode ? 'Férias atualizadas com sucesso!' : 'Ferias registradas com sucesso!'
           );
-          this.router.navigate(['/vacation']);
+          this.router.navigate(['/vacations']);
         },
         error: (err) => {
-          console.error('Erro ao salvar folga:', err);
+          console.error('Erro ao salvar Férias:', err);
           this.showErrorMessage(
-            'Erro ao salvar folga: ' + (err.error?.message || 'Erro desconhecido')
+            'Erro ao salvar Férias: ' + (err.error?.message || JSON.stringify(err) ||'Erro desconhecido')
           );
         },
       });
