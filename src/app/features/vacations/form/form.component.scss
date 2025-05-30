@@ -1,0 +1,44 @@
+/* Especificidade maior para garantir que o estilo será aplicado ao botão */
+form .mat-raised-button {
+  background-color: #4caf50 !important;
+  color: white !important;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+form .mat-raised-button:hover {
+  background-color: #388e3c !important;
+}
+
+/* Usando ::ng-deep para aplicar estilo ao mat-raised-button */
+::ng-deep .mat-raised-button {
+  background-color: #4caf50 !important;
+  color: white !important;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+::ng-deep .mat-raised-button:hover {
+  background-color: #388e3c !important;
+}
+
+
+::ng-deep .mat-raised-button {
+  background-color: #4caf50 !important; /* Cor de fundo */
+  color: white !important;              /* Cor do texto */
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+}
+
+::ng-deep .mat-raised-button:hover {
+  background-color: #388e3c !important; /* Cor do botão ao passar o mouse */
+}
