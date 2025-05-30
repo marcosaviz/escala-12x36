@@ -15,9 +15,9 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Campo: Data da folga -->
+      <!-- Campo: Período das férias -->
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Data da Folga</mat-label>
+        <mat-label>Inicio</mat-label>
         <input
          matInput 
          [matDatepicker]="picker" 
@@ -28,10 +28,17 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <!-- Campo: Motivo -->
+
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Motivo (opcional)</mat-label>
-        <input matInput formControlName="reason" type="text">
+        <mat-label>Fim</mat-label>
+        <input
+         matInput 
+         [matDatepicker]="picker" 
+         formControlName="date" 
+         [matDatepickerFilter]="filterValidDate"
+         >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
     </div>

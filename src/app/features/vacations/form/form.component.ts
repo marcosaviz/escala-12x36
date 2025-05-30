@@ -69,7 +69,7 @@ export class FormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private vacation: VacationService,
+    private vacationService: VacationService,
     private employeeService: EmployeeService,
     private router: Router,
     private route: ActivatedRoute,
@@ -83,25 +83,25 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadDayOff();
+    this.loadVacation();
     this.loadEmployees();
   }
 
-  private loadDayOff() {
+  private loadVacation() {
     this.route.paramMap.subscribe((params) => {
       const idParam = params.get('id');
       if (idParam) {
         this.isEditMode = true;
         this.vacationId = +idParam;
 
-        this.VacationService.findById(this.vacationId).subscribe({
+        this.vacationService.findById(this.vacationId).subscribe({
           next: (vacation) => {
             if (vacation) {
-              const formattedDate = new Date(vacation.day);
+              const formattedStartDate = new Date(vacation.startDate);
+              const formattedEndDate = new Date(vacation.endDate);
               this.vacationForm.patchValue({
-                employeeId: vacation.employee_id,
-                date: formattedDate,
-                reason: vacation.reason,
+                employeeId: vacation.employeeId,
+                date: formattedStartDate, formattedEndDate
               });
             }
           },
@@ -143,9 +143,10 @@ export class FormComponent implements OnInit {
     if (this.vacationForm.valid) {
       const formValues = this.vacationForm.value;
       const vacationData: Vacation = {
-        employee_id: formValues.employeeId,
-        day: this.formatDate(formValues.date),
-        reason: formValues.reason,
+        employeeId: formValues.employeeId,
+        startDate: this.formatDate(formValues.startDate),
+        endDate: this.formatDate(formValues.endDate)
+        
       };
 
       const request = this.isEditMode
@@ -157,7 +158,7 @@ export class FormComponent implements OnInit {
           this.showSuccessMessage(
             this.isEditMode ? 'Folga registrada com sucesso!' : 'Folga criada com sucesso!'
           );
-          this.router.navigate(['/dayoffs']);
+          this.router.navigate(['/vacation']);
         },
         error: (err) => {
           console.error('Erro ao salvar folga:', err);
@@ -170,7 +171,7 @@ export class FormComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/dayoffs']);
+    this.router.navigate(['/vacation']);
   }
 
   private showErrorMessage(message: string) {

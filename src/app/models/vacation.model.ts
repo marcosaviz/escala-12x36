@@ -1,5 +1,5 @@
 export interface Vacation {
-    id: number;
+    id?: number;
     employeeId: number;
     startDate: string;
     endDate: string;

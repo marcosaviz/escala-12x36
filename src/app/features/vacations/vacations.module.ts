@@ -8,11 +8,12 @@ import { FormComponent } from './form/form.component';
 @NgModule({
   declarations: [
     VacationsComponent,
-    FormComponent
+
   ],
   imports: [
     CommonModule,
-    VacationsRoutingModule
+    VacationsRoutingModule,
+    FormComponent
   ]
 })
 export class VacationsModule { }
